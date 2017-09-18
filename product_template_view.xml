@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="x_view_product_template_form" model="ir.ui.view">
+            <field name="name">product.template.pieces.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <!--xpath expr="/page/page/group/group[@name='inventory']" position="inside"-->
+                <field name="route_from_categ_ids" position="after">
+                    <field name="platform_pieces" />
+                    <field name="presentation_pieces" />
+                </field>
+                <!--/xpath-->
+            </field>
+        </record>
+
+        <!--<record id="x_view_product_template_form" model="ir.ui.view">
+            <field name="name">product.template.pieces.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/group[1]" position="inside">
+                    <group>
+                        <field name="platform_pieces" />
+                        <field name="presentation_pieces" />
+                    </group>
+                </xpath>
+            </field>
+        </record>-->
+    </data>
+</openerp>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--report picking-->
+        <template id="report_lt_product" inherit_id="stock.report_picking">
+            <xpath expr="//div/table/thead/tr/th[@name='td_sched_date_h']" position="after">
+                <th><strong>Litros</strong></th>
+            </xpath>
+
+            <xpath expr="//div/table/tbody/tr/td[@name='td_sched_date']" position="after">
+                <td><span t-esc="o.calculate_sum_ltrs(o.move_lines)"/></td>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>
