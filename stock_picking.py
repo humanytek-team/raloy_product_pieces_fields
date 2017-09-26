@@ -31,9 +31,24 @@ class stock_picking(models.Model):
 		print 'MOVE_IDS: ', move_ids
 		if not move_ids:
 			return suma
+		else:
+			for line in move_ids:
+				print 'LINE: ', line
+				# suma += line.product_uos_qty * line.product_id.uos_coeff
+				suma += line.product_uom_qty * line.product_id.udv
 
-		for line in move_ids:
-			print 'LINE: ', line
-			suma += line.product_uos_qty * line.product_id.uos_coeff
+			return suma
 
-		return suma
+	def calculate_sum_weight(self, move_ids):
+		suma = 0.0
+		move_ids = self.move_lines
+		print 'MOVE_IDS: ', move_ids
+		if not move_ids:
+			return suma
+		else:
+			for line in move_ids:
+				print 'LINE: ', line
+				# suma += line.product_uos_qty * line.product_id.uos_coeff
+				suma += line.product_uom_qty * line.product_id.weight
+
+			return suma

@@ -35,6 +35,7 @@ class stock_move(models.Model):
 	# 			value = rec.product_uom_qty / rec.product_id.presentation_pieces
 	# 			rec.uda = value
 	# 			return value
+
 	@api.one
 	@api.depends('product_id','product_uom_qty')
 	def calculate_uda(self):
@@ -43,13 +44,13 @@ class stock_move(models.Model):
 		else:
 			self.uda = self.product_uom_qty / self.product_id.presentation_pieces
 
-	@api.one
-	@api.onchange('product_id','product_uom_qty')
-	def _get_product_oum_qty_uda(self):
-		if self.product_id.presentation_pieces == 0:
-			self.uda = 0
-		else:
-			self.uda = self.product_uom_qty / self.product_id.presentation_pieces
+	# @api.one
+	# @api.onchange('product_id','product_uom_qty')
+	# def _get_product_oum_qty_uda(self):
+	# 	if self.product_id.presentation_pieces == 0:
+	# 		self.uda = 0
+	# 	else:
+	# 		self.uda = self.product_uom_qty / self.product_id.presentation_pieces
 
 
 	uda = fields.Float('Unidad de almacenamiento', compute='calculate_uda', store=True)

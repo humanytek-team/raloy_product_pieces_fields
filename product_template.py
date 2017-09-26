@@ -25,5 +25,6 @@ from openerp import models, fields, api, _
 class product_template(models.Model):
 	_inherit = 'product.template'
 
+	udv = fields.Float('Coeficiente Unidad de Venta', digits=(12,3))
 	platform_pieces = fields.Integer('Piezas por tarima')
 	presentation_pieces = fields.Integer('Piezas por presentacion')

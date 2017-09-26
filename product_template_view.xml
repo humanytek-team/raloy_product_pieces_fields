@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <!--xpath expr="/page/page/group/group[@name='inventory']" position="inside"-->
                 <field name="route_from_categ_ids" position="after">
+                    <field name="udv" />
                     <field name="platform_pieces" />
                     <field name="presentation_pieces" />
                 </field>
