@@ -19,12 +19,12 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-#import time
+from openerp import models, fields
+
 
 class product_template(models.Model):
-	_inherit = 'product.template'
+    _inherit = 'product.template'
 
-	udv = fields.Float('Coeficiente Unidad de Venta', digits=(12,3))
-	platform_pieces = fields.Integer('Piezas por tarima')
-	presentation_pieces = fields.Integer('Piezas por presentacion')
+    udv = fields.Float('Coeficiente Unidad de Venta', digits=(12, 3))
+    platform_pieces = fields.Integer('Piezas por tarima')
+    presentation_pieces = fields.Integer('Piezas por presentacion')

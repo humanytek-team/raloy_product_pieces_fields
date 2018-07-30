@@ -19,36 +19,28 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-#import time
+from openerp import models
+
 
 class stock_picking(models.Model):
-	_inherit = 'stock.picking'
+    _inherit = 'stock.picking'
 
-	def calculate_sum_ltrs(self, move_ids):
-		suma = 0.0
-		move_ids = self.move_lines
-		print 'MOVE_IDS: ', move_ids
-		if not move_ids:
-			return suma
-		else:
-			for line in move_ids:
-				print 'LINE: ', line
-				# suma += line.product_uos_qty * line.product_id.uos_coeff
-				suma += line.product_uom_qty * line.product_id.udv
+    def calculate_sum_ltrs(self, move_ids):
+        suma = 0.0
+        move_ids = self.move_lines
+        if not move_ids:
+            return suma
+        else:
+            for line in move_ids:
+                suma += line.product_uom_qty * line.product_id.udv
+            return suma
 
-			return suma
-
-	def calculate_sum_weight(self, move_ids):
-		suma = 0.0
-		move_ids = self.move_lines
-		print 'MOVE_IDS: ', move_ids
-		if not move_ids:
-			return suma
-		else:
-			for line in move_ids:
-				print 'LINE: ', line
-				# suma += line.product_uos_qty * line.product_id.uos_coeff
-				suma += line.product_uom_qty * line.product_id.weight
-
-			return suma
+    def calculate_sum_weight(self, move_ids):
+        suma = 0.0
+        move_ids = self.move_lines
+        if not move_ids:
+            return suma
+        else:
+            for line in move_ids:
+                suma += line.product_uom_qty * line.product_id.weight
+            return suma

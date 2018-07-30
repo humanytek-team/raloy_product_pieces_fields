@@ -19,39 +19,19 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-#import time
+from openerp import models, fields, api
+
 
 class stock_move(models.Model):
-	_inherit = 'stock.move'
+    _inherit = 'stock.move'
 
-	# @api.depends('product_id','product_uom_qty')
-	# def calculate_uda(self):
-	# 	value = 0
-	# 	for rec in self:
-	# 		if rec.product_id.presentation_pieces == 0:
-	# 			return value
-	# 		else:
-	# 			value = rec.product_uom_qty / rec.product_id.presentation_pieces
-	# 			rec.uda = value
-	# 			return value
+    @api.one
+    @api.depends('product_id', 'product_uom_qty')
+    def calculate_uda(self):
+        if self.product_id.presentation_pieces == 0:
+            self.uda = 0
+        else:
+            self.uda = self.product_uom_qty / self.product_id.presentation_pieces
 
-	@api.one
-	@api.depends('product_id','product_uom_qty')
-	def calculate_uda(self):
-		if self.product_id.presentation_pieces == 0:
-			self.uda = 0
-		else:
-			self.uda = self.product_uom_qty / self.product_id.presentation_pieces
-
-	# @api.one
-	# @api.onchange('product_id','product_uom_qty')
-	# def _get_product_oum_qty_uda(self):
-	# 	if self.product_id.presentation_pieces == 0:
-	# 		self.uda = 0
-	# 	else:
-	# 		self.uda = self.product_uom_qty / self.product_id.presentation_pieces
-
-
-	uda = fields.Float('Unidad de almacenamiento', compute='calculate_uda', store=True)
-	product_categ_id = fields.Many2one(string='Categoria del producto', store=True, related='product_id.categ_id')
+    uda = fields.Float('Unidad de almacenamiento', compute='calculate_uda', store=True)
+    product_categ_id = fields.Many2one(string='Categoria del producto', store=True, related='product_id.categ_id')
