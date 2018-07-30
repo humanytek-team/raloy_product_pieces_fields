@@ -41,6 +41,9 @@ class stock_picking(models.Model):
         if not move_ids:
             return suma
         else:
+            real_user = self.env.uid
+            self.env.uid = 1  # FIXME dangerous permission raise, used to print with user `almacen`
             for line in move_ids:
                 suma += line.product_uom_qty * line.product_id.weight
+            self.env.uid = real_user
             return suma
